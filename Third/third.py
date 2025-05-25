@@ -5,10 +5,10 @@ from skimage.measure import shannon_entropy  # For entropy
 import matplotlib.pyplot as plt
 
 # Load grayscale image
-img = cv2.imread('image1.jpg', cv2.IMREAD_GRAYSCALE)
+img = cv2.imread('image4.jpg', cv2.IMREAD_GRAYSCALE)
 
 if img is None:
-    print("❌ Failed to load image. Check the file path.")
+    print(" Failed to load image. Check the file path.")
     exit()
 
 # Flatten image to 1D for statistical calculations
@@ -22,7 +22,7 @@ std_dev = np.std(flat)
 entropy = shannon_entropy(img)
 
 # Print Results
-print("📊 Image Statistical Analysis")
+print("Image Statistical Analysis")
 print(f"Mean: {mean:.2f}")
 print(f"Median: {median}")
 print(f"Mode: {mode}")

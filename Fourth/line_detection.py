@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 # Load original image for line detection
-img_color = cv2.imread('image2.jpg')
+img_color = cv2.imread('image7.jpg')
 gray = cv2.cvtColor(img_color, cv2.COLOR_BGR2GRAY)
 
 # Edge detection

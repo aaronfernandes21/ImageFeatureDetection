@@ -3,10 +3,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Load the grayscale image
-img = cv2.imread('image2.jpg', cv2.IMREAD_GRAYSCALE)
+img = cv2.imread('image3.jpg', cv2.IMREAD_GRAYSCALE)
 
 if img is None:
-    print("❌ Could not load image. Check the path.")
+    print(" Could not load image. Check the path.")
     exit()
 
 # Define a simple 3x3 kernel (e.g., edge detection)

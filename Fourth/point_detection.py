@@ -3,9 +3,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Load grayscale image
-img = cv2.imread('image2.jpg', cv2.IMREAD_GRAYSCALE)
+img = cv2.imread('image5.jpg', cv2.IMREAD_GRAYSCALE)
 if img is None:
-    print("❌ Could not load image.")
+    print("Could not load image.")
     exit()
 
 # Apply Laplacian filter for point detection
