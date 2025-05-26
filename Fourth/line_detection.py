@@ -1,37 +1,44 @@
+# line_detection.py
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
-# Load original image for line detection
-img_color = cv2.imread('image7.jpg')
-gray = cv2.cvtColor(img_color, cv2.COLOR_BGR2GRAY)
 
-# Edge detection
-edges = cv2.Canny(gray, 50, 150, apertureSize=3)
+# Load image and convert to grayscale
+img = cv2.imread('image7.jpg')
+if img is None:
+    print("Image not found.")
+    exit()
 
-# Hough Line Transform
-lines = cv2.HoughLines(edges, 1, np.pi / 180, 150)
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
+# Apply Canny edge detection
+edges = cv2.Canny(gray, 50, 150)
+
+# Probabilistic Hough Transform for line detection
+lines = cv2.HoughLinesP(edges, 1, np.pi / 180, threshold=100, minLineLength=80, maxLineGap=10)
+
+# Draw lines on a copy of the image
+line_img = img.copy()
 if lines is not None:
-    for rho, theta in lines[:, 0]:
-        a = np.cos(theta)
-        b = np.sin(theta)
-        x0 = a * rho
-        y0 = b * rho
-        x1 = int(x0 + 1000 * (-b))
-        y1 = int(y0 + 1000 * (a))
-        x2 = int(x0 - 1000 * (-b))
-        y2 = int(y0 - 1000 * (a))
-        cv2.line(img_color, (x1, y1), (x2, y2), (0, 0, 255), 2)
+    for line in lines:
+        x1, y1, x2, y2 = line[0]
+        cv2.line(line_img, (x1, y1), (x2, y2), (0, 255, 0), 2)
 
-# Show result
-plt.subplot(1, 2, 1)
+# Display
+plt.figure(figsize=(10, 4))
+plt.subplot(1, 3, 1)
+plt.title("Original")
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.axis('off')
+
+plt.subplot(1, 3, 2)
 plt.title("Edges")
 plt.imshow(edges, cmap='gray')
 plt.axis('off')
 
-plt.subplot(1, 2, 2)
+plt.subplot(1, 3, 3)
 plt.title("Line Detection")
-plt.imshow(cv2.cvtColor(img_color, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(line_img, cv2.COLOR_BGR2RGB))
 plt.axis('off')
 
 plt.tight_layout()
