@@ -1,1 +1,1 @@
-Design and implement point detection and line detecion
+Design and implement point detection
